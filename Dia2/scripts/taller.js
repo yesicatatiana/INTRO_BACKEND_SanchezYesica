@@ -23,38 +23,7 @@
 // Se utiliza (super()) dentro del constructor de la clase hija para llamar al constructor de la clase padre y así inicializar propiedades heredadas.
 // También se pueden sobrescribir métodos (personalizar el comportamiento) y añadir propiedades o métodos nuevos en la clase hija
 
-class animal {
-    constructor(nombre) {
-        this.nombre = nombre;
-    }
 
-    hablar() {
-        console.log(`${this.nombre} hace un sonido`);
-    }
-}
-
-class perro extends animal {
-    constructor(nombre, raza) {
-        super(nombre);
-        this.raza = raza;
-    }
-
-    hablar() {
-        console.log(`${this.nombre} dice ¡guau!`);
-    }
-
-    ladrar() {
-        console.log(`${}`)
-    }
-
-}
-
-
-
-
-
-
-/*
 
 // Clase Padre (Superclase)
 class Animal {
@@ -94,4 +63,81 @@ miPerro.ladrar();   // Imprime: "Buddy ladra mucho." (Se usa el método nuevo)
 // También puede acceder al método de la clase padre si no estuviera sobrescrito:
 // console.log(miPerro.nombre); // Imprime: "Buddy" (Propiedad heredada)
 
+
+
+// ____________________________________________________________________________________________
+
+/*
+class persona {
+    constructor (nombre){
+        this.nombre = nombre;
+    }
+
+    hablar(){
+        console.log(`${this.nombre} dice hola!`)
+    }
+
+}
+
+
+class mujer extends persona {
+    constructor (nombre,genero){
+        super(nombre);
+        this.genero = genero;
+    }
+    hablar(){
+        console.log(`${this.nombre} dice chao`);
+    }
+
+    caminar() {
+        console.log(`${this.nombre} camina mucho`);
+    }
+}
+
+const miPersona = new persona ('sofio','hombre');
+
+miPersona.hablar();
+miPersona.caminar();
 */
+
+
+
+//______________________________________________________________________________________________
+
+
+
+class figura {
+    constructor(forma){
+        this.forma = forma;
+    }
+
+    rodar(){
+        console.log(`el ${this.forma} rueda derecho`)
+    }
+}
+
+class cuadrado extends figura {
+    constructor(forma,color){
+        super(forma);
+        this.color = color;
+    }
+
+    rodar(){
+        console.log(`el ${this.forma} no es redondo`)
+    }
+
+    color(){
+        console.log(`el ${this.forma}`)
+    }
+}
+
+const miFigura = new figura ('redondo','azul')
+
+miFigura.rodar();
+miFigura.color();
+
+
+//___________________________________________________________________________
+
+
+// ENCAPSULACION
