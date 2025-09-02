@@ -55,7 +55,7 @@ class Perro extends Animal {
 }
 
 // Creamos una instancia de la clase hija
-const miPerro = new Perro('Buddy', 'Golden Retriever');
+const mPerro = new Perro('Buddy', 'Golden Retriever');
 
 miPerro.hablar();   // Imprime: "Buddy dice ¡Guau!" (Se usa el método sobrescrito)
 miPerro.ladrar();   // Imprime: "Buddy ladra mucho." (Se usa el método nuevo)
@@ -140,4 +140,140 @@ miFigura.color();
 //___________________________________________________________________________
 
 
+
+
+
 // ENCAPSULACION
+
+// es el principio de agrupar los datos (atributos) y los métodos (funciones) de un objeto 
+// en una sola unidad (una clase) y restringir el acceso directo a ellos desde el exterior
+
+
+class CuentaBancaria {
+    constructor(numeroCuenta, titular) {
+    // Datos privados (convención de nomenclatura con guion bajo)
+        this._numeroCuenta = numeroCuenta;
+        this._titular = titular;
+        this._saldo = 0;
+    }
+
+  // Método público para depositar ( Setter con lógica)
+    depositar(monto) {
+    if (monto > 0) {
+        this._saldo += monto;
+        console.log(`Depósito exitoso. Saldo actual: ${this._saldo}`);
+    } else {
+        console.log("El monto debe ser positivo.");
+        }
+    }
+
+  // Método público para retirar ( Setter con lógica)
+    retirar(monto) {
+    if (monto > 0 && this._saldo >= monto) {
+        this._saldo -= monto;
+        console.log(`Retiro exitoso. Saldo actual: ${this._saldo}`);
+    } else if (monto <= 0) {
+        console.log("El monto debe ser positivo.");
+    } else {
+        console.log("Saldo insuficiente.");
+        }
+    }
+
+  // Método público para obtener el saldo ( Getter)
+    getSaldo() {
+        return this._saldo;
+    }
+
+  // Método público para obtener los detalles de la cuenta
+    getDetallesCuenta() {
+        return `Número de cuenta: ${this._numeroCuenta}, Titular: ${this._titular}, Saldo: ${this._saldo}`;
+    }
+}
+
+// Uso de la clase
+const miCuenta = new CuentaBancaria("12345", "Juan Pérez");
+miCuenta.depositar(1000); // "Depósito exitoso. Saldo actual: 1000"
+miCuenta.retirar(200); // "Retiro exitoso. Saldo actual: 800"
+console.log(miCuenta.getSaldo()); // 800
+// miCuenta._saldo = 10000; // Esto no funcionaría como se espera, el _saldo se mantiene 800
+
+
+
+// _____________________________________________________________________________________________________
+
+
+// POLIMORFISMO
+
+//permite que objetos de diferentes clases respondan a un mismo mensaje (método) 
+// de manera específica para cada uno, haciendo el código más flexible y reutilizable
+
+
+// Definición de clases
+class Perro {
+    ladrar() {
+        return "¡Guau, guau!";
+    }
+}
+
+class Gato {
+    maullar() {
+        return "¡Miau, miau!";
+    }
+}
+
+class Pato {
+    graznar() {
+        return "¡Cuac, cuac!";
+    }
+}
+
+// Función que espera un objeto con un método 'hacerSonido'
+function hacerSonido(animal) {
+  // Asume que el animal tiene un método 'hacerSonido'
+  // En un sistema estricto, esto requeriría una interfaz.
+  // En JavaScript, se comprueba en tiempo de ejecución.
+    console.log(animal.hacerSonido());
+}
+
+// Creamos diferentes objetos
+const miPerro = {
+    hacerSonido: function() { return "¡Guau, guau!"; }
+};
+
+const miGato = {
+    hacerSonido: function() { return "¡Miau, miau!"; }
+};
+
+const miPato = {
+    hacerSonido: function() { return "¡Cuac, cuac!"; }
+};
+
+// Llamamos a la función con objetos de diferentes tipos
+hacerSonido(miPerro); // Imprime: ¡Guau, guau!
+hacerSonido(miGato);  // Imprime: ¡Miau, miau!
+hacerSonido(miPato);  // Imprime: ¡Cuac, cuac!
+
+// Ejemplo con polimorfismo a través de clases (si tuvieran el mismo método)
+class Animal {
+    hacerSonido() {
+        return "Sonido de animal";
+    }
+}
+
+class PerroHerencia extends Animal {
+    hacerSonido() { // Sobrescribe el método de la clase padre
+        return "¡Guau, guau!";
+    }
+}
+
+class GatoHerencia extends Animal {
+    hacerSonido() { // Sobrescribe el método de la clase padre
+        return "¡Miau, miau!";
+    }
+}
+
+const miPerro2 = new PerroHerencia();
+const miGato2 = new GatoHerencia();
+
+console.log(miPerro2.hacerSonido()); // Imprime: ¡Guau, guau!
+console.log(miGato2.hacerSonido());  // Imprime: ¡Miau, miau!
